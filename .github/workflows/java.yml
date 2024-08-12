@@ -40,7 +40,7 @@ jobs:
         
     - name: Tag Docker image
       run: |
-        docker tag backend:latest ${{ secrets.URI_TAG }}:latest
+        docker tag java-mongo:latest ${{ secrets.URI_TAG }}:latest
 
     - name: Push Docker image to ECR
       run: |
