@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copy the executable JAR file into the container
-COPY target/your-app-name.jar /app/app.jar
+COPY target/java-mongo.jar /app/app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
