@@ -1,16 +1,17 @@
 package com.mongo.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "items")
 public class Item {
 	@Id
-	private int id;
+	private ObjectId id;
 	private String name;
 	private int price;
 	
-	public Item(int id, String name, int price) {
+	public Item(ObjectId id, String name, int price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,11 +23,11 @@ public class Item {
 		return "Item [id=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 
-	public int getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
