@@ -3,6 +3,7 @@ package com.mongo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,7 +31,7 @@ public class MController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> getItemById(@PathVariable int id) {
+    public ResponseEntity<Item> getItemById(@PathVariable ObjectId id) {
         Optional<Item> item = service.getItemById(id);
         return item.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -41,7 +42,7 @@ public class MController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item item) {
+    public ResponseEntity<Item> updateItem(@PathVariable ObjectId id, @RequestBody Item item) {
         Item updatedItem = service.updateItem(id, item);
         if (updatedItem != null) {
             return ResponseEntity.ok(updatedItem);
@@ -50,7 +51,7 @@ public class MController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteItem(@PathVariable int id) {
+    public ResponseEntity<Void> deleteItem(@PathVariable ObjectId id) {
     	service.deleteItem(id);
         return ResponseEntity.noContent().build();
     }

@@ -3,6 +3,7 @@ package com.mongo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class MService {
         return repo.findAll();
     }
 
-    public Optional<Item> getItemById(int id) {
+    public Optional<Item> getItemById(ObjectId id) {
         return repo.findById(id);
     }
 
@@ -28,7 +29,7 @@ public class MService {
         return repo.save(item);
     }
 
-    public Item updateItem(int id, Item item) {
+    public Item updateItem(ObjectId id, Item item) {
         Optional<Item> existingItem = repo.findById(id);
         if (existingItem.isPresent()) {
             Item updateItem = existingItem.get();
@@ -41,7 +42,7 @@ public class MService {
         return null;
     }
 
-    public void deleteItem(int id) {
+    public void deleteItem(ObjectId id) {
         repo.deleteById(id);
     }
 
