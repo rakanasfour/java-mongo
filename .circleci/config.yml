@@ -3,19 +3,13 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: openjdk:17-jdk
+      - image: maven:3.8.6-openjdk-17
 
 jobs:
   build_and_push:
     executor: docker-executor
     steps:
       - checkout
-
-      - run:
-          name: Install Maven
-          command: |
-            apt-get update && \
-            apt-get install -y maven
 
       - run:
           name: Build with Maven
@@ -44,14 +38,4 @@ jobs:
 
       - run:
           name: Tag Docker image
-          command: docker tag java-mongo:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.REPOSITORY_NAME }}:latest
-
-      - run:
-          name: Push Docker image to ECR
-          command: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.amazonaws.com/${{ secrets.REPOSITORY_NAME }}:latest
-
-workflows:
-  version: 2
-  build_and_push_workflow:
-    jobs:
-      - build_and_push
+          command: docker tag java-mongo:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-2.am
